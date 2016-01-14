@@ -6,6 +6,7 @@ MessageList::MessageList(QWidget *parent):
 {
 
     tableView = new QTableView(this);
+    model = new MessageListModel(tableView);
 
     QHBoxLayout *mainLayout = new QHBoxLayout;
 
@@ -26,7 +27,9 @@ void MessageList::addMessage(Message message){
 }
 
 void MessageList::initializeModel(){
-    model = new QStandardItemModel(4,2,this);
+    model = new MessageListModel(this);
+
+    model->AddMessage(MessageEntry::Debug,"test","message");
     tableView->setModel(model);
 
 
@@ -34,7 +37,7 @@ void MessageList::initializeModel(){
    model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
    model->setHeaderData(1,Qt::Horizontal,QObject::tr("jdj"));
 
-model->setHeaderData(2,Qt::Horizontal,QObject::tr(""));
+   model->setHeaderData(2,Qt::Horizontal,QObject::tr(""));
 
     // Generate basic data
     // Generate data
